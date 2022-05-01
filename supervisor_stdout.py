@@ -1,7 +1,9 @@
 from __future__ import print_function
 import sys
 from datetime import datetime
-
+import pytz
+  
+UTC = pytz.utc
 
 def write_stdout(s):
     sys.stdout.write(s)
@@ -24,7 +26,7 @@ def event_handler(event, response):
     line, data = response.split('\n', 1)
     headers = dict([ x.split(':') for x in line.split() ])
     lines = data.split('\n')
-    zeit = datetime.now("%Y-%m-%d %H:%M:%S %Z%z")
+    zeit = datetime.now(UTC)
     prefix = '%s %s %s | '%(zeit,headers['processname'], headers['channel'])
     print('\n'.join([ prefix + l for l in lines ]))
 
