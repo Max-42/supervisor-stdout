@@ -1,5 +1,7 @@
 from __future__ import print_function
 import sys
+from datetime import datetime
+
 
 def write_stdout(s):
     sys.stdout.write(s)
@@ -22,7 +24,8 @@ def event_handler(event, response):
     line, data = response.split('\n', 1)
     headers = dict([ x.split(':') for x in line.split() ])
     lines = data.split('\n')
-    prefix = '%s %s | '%(headers['processname'], headers['channel'])
+    zeit = datetime.now("%Y-%m-%d %H:%M:%S %Z%z")
+    prefix = '%s %s %s | '%(zeit,headers['processname'], headers['channel'])
     print('\n'.join([ prefix + l for l in lines ]))
 
 if __name__ == '__main__':
