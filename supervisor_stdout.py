@@ -24,7 +24,7 @@ def event_handler(event, response):
     headers = dict([ x.split(':') for x in line.split() ])
     lines = data.split('\n')
     zeit = str(datetime.now())[:-3]
-    prefix = '%s | %s | %s | '%(zeit,headers['processname'], headers['channel'])
+    prefix = '%s %s %s | '%(zeit,headers['processname'], headers['channel'])
     print('\n'.join([ prefix + l for l in lines ]))
 
 if __name__ == '__main__':
